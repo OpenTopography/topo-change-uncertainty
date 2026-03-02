@@ -1,7 +1,7 @@
 # See https://citation-file-format.github.io/ for the specification.
 
 cff-version: 1.2.0
-title: topochange
+title: topo-change-uncertainty
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -44,7 +44,7 @@ authors:
   - given-names: Matthew
     family-names: Beckley
     affiliation: EarthScope Consortium, Washington, D.C., USA
-repository-code: https://github.com/Cassandra-Brigham/topochange
+repository-code: https://github.com/OpenTopography/topo-change-uncertainty
 abstract: >-
   Topographic change detection and uncertainty quantification
   using variogram-based methods. A Python library for comparing
