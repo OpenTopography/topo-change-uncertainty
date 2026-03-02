@@ -1,11 +1,15 @@
-# topochange
+[![NSF-2410799](https://img.shields.io/badge/NSF-2410799-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=2410799)
+[![NSF-2410800](https://img.shields.io/badge/NSF-2410800-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=2410800)
+[![NSF-2410801](https://img.shields.io/badge/NSF-2410801-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=2410801)
+
+# topo-change-uncertainty
 
 **Geostatistical uncertainty estimation for airborne lidar topographic differencing**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 
-`topochange` is an open-source Python package for quantifying spatially correlated uncertainty in lidar-based topographic change detection. It decomposes vertical differencing error into bias, correlated, and uncorrelated components at multiple spatial scales using nested variogram models, and propagates that uncertainty over user-defined regions of interest.
+`topo-change-uncertainty` is an open-source Python package for quantifying spatially correlated uncertainty in lidar-based topographic change detection. It decomposes vertical differencing error into bias, correlated, and uncorrelated components at multiple spatial scales using nested variogram models, and propagates that uncertainty over user-defined regions of interest.
 
 The package is integrated into the [OpenTopography](https://opentopography.org) platform for on-demand, cloud-based analysis and is also available as a standalone tool with accompanying Jupyter notebooks for customizable workflows.
 
@@ -44,7 +48,7 @@ These errors in airborne lidar differencing arise at multiple spatial scales:
 - **Mid-range (hundreds of meters):** Flight-line alignment artifacts that appear as banded stripes, and topographically correlated errors from horizontal georeferencing offsets.
 - **Long-range (kilometers):** Systematic calibration biases, incorrect vertical datum metadata, or mismatched geoid models that shift an entire dataset up or down.
 
-`topochange` uses geostatistics, specifically **semivariogram analysis**, to characterize these multi-scale error structures without needing to model each source explicitly. The approach treats the net differencing error as a spatially correlated random field (Matheron, 1965) and fits **nested spherical variogram models** to decompose the total variance into a nugget (uncorrelated noise), one or more spatially correlated components (each with a characteristic sill and range), and a systematic bias estimated from the median of the difference raster.
+`topo-change-uncertainty` uses geostatistics, specifically **semivariogram analysis**, to characterize these multi-scale error structures without needing to model each source explicitly. The approach treats the net differencing error as a spatially correlated random field (Matheron, 1965) and fits **nested spherical variogram models** to decompose the total variance into a nugget (uncorrelated noise), one or more spatially correlated components (each with a characteristic sill and range), and a systematic bias estimated from the median of the difference raster.
 
 The fitted variogram is then used to propagate uncertainty over arbitrary polygonal regions via Monte Carlo integration of the covariance function (following Rolstad et al., 2009; Hugonnet et al., 2022). This yields a **regionalized standard deviation** that correctly accounts for spatial correlation, analogous to how averaging correlated measurements reduces uncertainty more slowly than averaging independent ones.
 
@@ -179,7 +183,7 @@ pip install topochange
 **From source (for development or latest changes):**
 
 ```bash
-git clone https://github.com/Cassandra-Brigham/topochange.git
+git clone https://github.com/OpenTopography/topo-change-uncertainty.git
 cd topochange
 pip install -e .
 ```
@@ -233,7 +237,7 @@ The Jupyter notebooks include built-in Colab setup cells that handle the entire 
    - Install [condacolab](https://github.com/conda-incubator/condacolab) to enable conda/mamba within Colab
    - Install PDAL and python-pdal via mamba
    - Pin `numpy<2.2` for compatibility
-   - Install `topochange` directly from the GitHub repository
+   - Install `topo-change-uncertainty` directly from the GitHub repository
    - Install additional packages (`small-gicp`, `colormaps`, `boto3`, `ipywidgets`, `ipyleaflet`)
    - Fix the pyproj PROJ data path for the Colab environment
 
@@ -268,7 +272,7 @@ After the environment is ready:
 ```bash
 !mamba install -y -c conda-forge pdal python-pdal
 !{sys.executable} -m pip install -q "numpy<2.2"
-!{sys.executable} -m pip install -q --no-cache-dir git+https://github.com/Cassandra-Brigham/topochange.git
+!{sys.executable} -m pip install -q --no-cache-dir git+https://github.com/OpenTopography/topo-change-uncertainty.git
 !{sys.executable} -m pip install -q small-gicp colormaps boto3
 %pip install -q comm ipywidgets
 %pip install -q ipyleaflet
@@ -425,18 +429,18 @@ The test suite includes 18 test modules covering raster and point cloud I/O, CRS
 
 ## Citation
 
-If you use `topochange` in your research, please cite:
+If you use `topo-change-uncertainty` in your research, please cite:
 
 ```bibtex
-@software{brigham2026topochange,
+@software{opentopography2026topo-change-uncertainty,
   author       = {Brigham, Cassandra and Scott, Chelsea and Arrowsmith, Ramon and
                   Phan, Minh and DeWitt, Jessica and Palaseanu-Lovejoy, Monica and
                   Nandigam, Viswanath and Stoker, Jason and Anderson, Scott Wallace and
                   Gesch, Dean B and Crosby, Christopher J and Beckley, Matthew},
-  title        = {topochange},
+  title        = {topo-change-uncertainty},
   version      = {0.1.0},
   year         = {2026},
-  url          = {https://github.com/Cassandra-Brigham/topochange},
+  url          = {https://github.com/OpenTopography/topo-change-uncertainty},
   license      = {MIT}
 }
 ```
